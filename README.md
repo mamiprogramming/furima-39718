@@ -32,7 +32,6 @@ Things you may want to cover:
 | name                  | string | null: false               |
 | email                 | string | null: false, unique: true |
 | encrypted_password    | string | null: false               |
-| password confirmation | string | null: false               |
 | familyname_kanji      | string | null: false               |
 | firstname_kanji       | string | null: false               |
 | familyname_katakana   | string | null: false               |
@@ -54,7 +53,7 @@ Things you may want to cover:
 | situation_id  | integer    | null: false                    |
 | postage_id    | integer    | null: false                    |
 | prefecture_id | integer    | null: false                    |
-| amountdays_id | integer    | null: false                    |
+| amountday_id  | integer    | null: false                    |
 | price         | integer    | null: false                    |
 | user          | references | null: false, foreign_key: true |
 
