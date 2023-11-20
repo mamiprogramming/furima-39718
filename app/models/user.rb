@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :familyname_kanji, presence: true
   validates :firstname_kanji, presence: true
-  validates :familyname_katakanai, presence: true
+  validates :familyname_katakana, presence: true
   validates :firstname_katakana, presence: true
   validates :birthday, presence: true
 end
