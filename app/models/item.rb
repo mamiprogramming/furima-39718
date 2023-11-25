@@ -11,3 +11,4 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :amountday_id, presence: true
   validates :price, presence: true
+end
