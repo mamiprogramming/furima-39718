@@ -3,7 +3,12 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = Item.new 
+    @category = Category.all
+    @situation = Situation.all
+    @postage = Postage.all
+    @prefecture = Prefecture.all
+    @amountday = Amountday.all
   end
 
   def message_params
