@@ -11,6 +11,15 @@ class ItemsController < ApplicationController
     @amountday = Amountday.all
   end
 
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+       redirect_to '/'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def message_params
     params.require(:item).permit(:content, :image).merge(user_id: current_user.id)
   end
