@@ -1,17 +1,17 @@
 FactoryBot.define do
   factory :item do
-    image {Faker::LoremFlickr.image}
-    item_name {Faker::Commerce.product_name}
-    explain {Faker::Lorem.paragraph}
-    category_id {FactoryBot.build(:category).id }
-    situation_id {FactoryBot.build(:situation).id}
-    postage_id {FactoryBot.build(:postage).id}
-    prefecture_id {FactoryBot.build(:prefecture).id}
-    amountday_id {FactoryBot.build(:amountday).id}
-    price {Faker::Commerce.price(range: 300..10_000_000)}
+    item_name { Faker::Commerce.product_name }
+    explain { Faker::Lorem.paragraph }
+    category_id {Faker::Number.between(from: 2, to: 11)}
+    situation_id {Faker::Number.between(from: 2, to: 7)}
+    postage_id {Faker::Number.between(from: 2, to: 3)}
+    prefecture_id {Faker::Number.between(from: 2, to: 48)}
+    amountday_id {Faker::Number.between(from: 2, to: 4)} 
+    price { Faker::Commerce.price(range: 300..10_000_000) }
+    association :user
 
     after(:build) do |item|
-      item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+      item.image.attach(io: File.open('app/assets/images/test_image.png'), filename: 'test_image.png')
     end
   end
 end
