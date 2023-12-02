@@ -27,7 +27,7 @@ class Item < ApplicationRecord
             numericality: { other_than: 1, message: 'should be selected from the options' }
   validates :price, presence: true
   validates :price,
-            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'is not included in the list' }
   validates :price, format: { with: /\A[0-9]+\z/, message: 'must be a number' }
 
