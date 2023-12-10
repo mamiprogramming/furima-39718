@@ -9,21 +9,18 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new
-    @order.item_id = params[:item_id]
-    @order.user_id = current_user.id
-
     if @item.user_id == current_user.id
       redirect_to root_path
       return
     end
   
-    if @order.save
-      address_params = order_params.merge(order_id: @order.id)
-      Address.create(address_params)
+    @order_address = OrderAddress.new(order_params.merge(user_id: current_user.id))
+  
+    if @order_address.valid?
+      @order_address.save
       redirect_to root_path
     else
-      render 'index', status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -34,11 +31,10 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:zip, :prefecture_id, :city, :street_number, :building, :telephone)
+    params.require(:order_address).permit(:zip, :prefecture_id, :city, :street_number, :building, :telephone).merge(user_id: current_user.id)
   end
 
   def check_user
-    return unless user_signed_in? && @item.user_id == current_user.id
-    redirect_to root_path
+    redirect_to root_path if user_signed_in? && @item.user_id == current_user.id
   end
 end
