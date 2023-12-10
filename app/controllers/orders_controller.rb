@@ -17,11 +17,6 @@ class OrdersController < ApplicationController
       redirect_to root_path
       return
     end
-
-    if @item.sold?
-      redirect_to root_path
-      return
-    end
   
     if @order.save
       address_params = order_params.merge(order_id: @order.id)
@@ -43,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def check_user
-    return unless user_signed_in?
+    return unless user_signed_in? && @item.user_id == current_user.id
     redirect_to root_path
   end
 end
