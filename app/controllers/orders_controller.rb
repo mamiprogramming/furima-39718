@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   before_action :check_user, only: [:index]
 
   def index
-    @orders = Order.all
     @order_address = OrderAddress.new
   end
 
