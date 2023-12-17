@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user, :item, :zip, :prefecture_id, :city, :street_number, :building, :telephone, :order, :user_id, :item_id,
+  attr_accessor :zip, :prefecture_id, :city, :street_number, :building, :telephone, :order, :user_id, :item_id,
                 :token, :price
 
   with_options presence: true do
@@ -10,16 +10,18 @@ class OrderAddress
     validates :telephone, numericality: { only_integer: true, message: 'should be only half-width numbers' },
                           length: { in: 10..11, message: 'should be between 10 and 11 digits' },
                           format: { with: /\A\d+\z/, message: 'should contain only half-width numbers' }
+    validates :token
   end
 
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
-  validates :token, presence: true
+  validates :item_id, presence: true
+  validates :user_id, presence: true
 
   def save
     ActiveRecord::Base.transaction do
-      order_address = Order.create(user_id:, item_id:)
+      order = Order.create(user_id:, item_id:)
       Address.create(zip:, prefecture_id:, city:, street_number:, building:,
-                     telephone:, order_id: order_address.id)
+                     telephone:, order_id: order.id)
     end
   end
 end

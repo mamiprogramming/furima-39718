@@ -13,11 +13,6 @@ class OrdersController < ApplicationController
     @order_address = OrderAddress.new(order_params)
     @order_address.item = @item
 
-    if @item.user_id == current_user.id
-      redirect_to root_path
-      return
-    end
-
     if @order_address.valid?
       pay_item
       @order_address.save
@@ -41,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def check_user
-    redirect_to root_path if user_signed_in? && @item.user_id == current_user.id
+    redirect_to root_path if @item.user_id == current_user.id
   end
 
   def pay_item
