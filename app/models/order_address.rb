@@ -10,12 +10,12 @@ class OrderAddress
     validates :telephone, numericality: { only_integer: true, message: 'should be only half-width numbers' },
                           length: { in: 10..11, message: 'should be between 10 and 11 digits' },
                           format: { with: /\A\d+\z/, message: 'should contain only half-width numbers' }
+    validates :item_id
+    validates :user_id
     validates :token
   end
 
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
-  validates :item_id, presence: true
-  validates :user_id, presence: true
 
   def save
     ActiveRecord::Base.transaction do
