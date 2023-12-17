@@ -54,7 +54,11 @@ class ItemsController < ApplicationController
   end
 
   def contributor
-    redirect_to root_path unless current_user == @item.user
+    if @item.sold_out?
+      redirect_to root_path
+    else
+      redirect_to root_path unless current_user == @item.user
+    end
   end
 
   def set_item
