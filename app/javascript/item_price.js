@@ -1,5 +1,8 @@
 window.addEventListener('turbo:load', () => {
   const priceInput = document.getElementById("item-price");
+  const addTaxDom = document.getElementById("add-tax-price");
+  const profitDom = document.getElementById("profit");
+
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
     const priceValue = parseFloat(inputValue.replace(/[^0-9.]/g, ''));
@@ -11,10 +14,11 @@ window.addEventListener('turbo:load', () => {
       return;
     }
     priceInput.value = formatPrice(priceValue);
-    const addTaxDom = document.getElementById("add-tax-price");
-    addTaxDom.innerHTML = formatPrice(Math.floor(priceValue * 0.1));
-    const profitDom = document.getElementById("profit");
-    profitDom.innerHTML = formatPrice(Math.floor(priceValue - Math.floor(priceValue * 0.1)));
+
+    if (addTaxDom && profitDom) {
+      addTaxDom.innerHTML = formatPrice(Math.floor(priceValue * 0.1));
+      profitDom.innerHTML = formatPrice(Math.floor(priceValue - Math.floor(priceValue * 0.1)));
+    }
   });
 });
 
