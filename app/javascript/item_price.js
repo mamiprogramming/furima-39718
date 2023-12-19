@@ -16,8 +16,10 @@ window.addEventListener('turbo:load', () => {
     priceInput.value = formatPrice(priceValue);
 
     if (addTaxDom && profitDom) {
-      addTaxDom.innerHTML = formatPrice(Math.floor(priceValue * 0.1));
-      profitDom.innerHTML = formatPrice(Math.floor(priceValue - Math.floor(priceValue * 0.1)));
+    const addTaxDom = document.getElementById("add-tax-price");
+    addTaxDom.innerHTML = formatPrice(Math.floor(priceValue * 0.1));
+    const profitDom = document.getElementById("profit");
+    profitDom.innerHTML = formatPrice(Math.floor(priceValue - Math.floor(priceValue * 0.1)));
     }
   });
 });
