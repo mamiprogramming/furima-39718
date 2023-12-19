@@ -9,6 +9,8 @@ class Item < ApplicationRecord
     image.attached?
   end
 
+  before_validation :normalize_price
+
   validates :item_name, presence: true
   validates :explain, presence: true
   validates :category_id, presence: true
@@ -43,5 +45,12 @@ class Item < ApplicationRecord
 
   def sold_out?
     order.present?
+  end
+
+  private
+
+  def normalize_price
+    # カンマを取り除いて数値に変換
+    self.price = price.to_s.gsub(/,/,'').to_i
   end
 end
