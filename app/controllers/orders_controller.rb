@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_params)
-    @order_address.item = @item
+    @order_address.item_id = @item.id
 
     if @order_address.valid?
       pay_item
