@@ -15,7 +15,8 @@ class OrderAddress
     validates :token
   end
 
-  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
+  validates :prefecture_id,
+            numericality: { other_than: 1, message: 'should be selected from the options' }
 
   def save
     ActiveRecord::Base.transaction do
