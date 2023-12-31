@@ -31,47 +31,47 @@ RSpec.describe Item, type: :model do
       it 'category_idが1以外でないと出品できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Category should be selected from the options')
+        expect(@item.errors.full_messages).to include("Category を入力してください")
       end
       it 'situation_idが1以外でないと出品できない' do
         @item.situation_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Situation should be selected from the options')
+        expect(@item.errors.full_messages).to include("Situation を入力してください")
       end
       it 'postage_idが1以外でないと出品できない' do
         @item.postage_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Postage should be selected from the options')
+        expect(@item.errors.full_messages).to include("Postage を入力してください")
       end
       it 'prefecture_idが1以外でないと出品できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Prefecture should be selected from the options')
+        expect(@item.errors.full_messages).to include("Prefecture を入力してください")
       end
       it 'amountday_idが1以外でないと出品できない' do
         @item.amountday_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Amountday should be selected from the options')
+        expect(@item.errors.full_messages).to include("Amountday を入力してください")
       end
       it 'priceが空だと出品できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price を整数で入力してください")
       end
       it 'priceが300未満だと出品できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not included in the list')
+        expect(@item.errors.full_messages).to include("Price を整数で入力してください")
       end
       it 'priceが10000000以上だと出品できない' do
         @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not included in the list')
+        expect(@item.errors.full_messages).to include("Price を整数で入力してください")
       end
       it 'priceが全角数字では出品できない' do
         @item.price = '９９９９９'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not included in the list')
+        expect(@item.errors.full_messages).to include("Price を整数で入力してください")
       end
       it 'userが紐付いていないと出品できない' do
         @item.user = nil

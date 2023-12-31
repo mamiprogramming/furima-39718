@@ -4,19 +4,19 @@ class OrderAddress
                 :token, :price
 
   with_options presence: true do
-    validates :zip, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
+    validates :zip, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'はハイフンを入力してください' }
     validates :city
     validates :street_number
-    validates :telephone, numericality: { only_integer: true, message: 'should be only half-width numbers' },
-                          length: { in: 10..11, message: 'should be between 10 and 11 digits' },
-                          format: { with: /\A\d+\z/, message: 'should contain only half-width numbers' }
+    validates :telephone, numericality: { only_integer: true, message: 'は整数で入力してください' },
+                          length: { in: 10..11, message: 'は10桁か11桁で入力してください' },
+                          format: { with: /\A\d+\z/, message: 'は半角数字で入力してください' }
     validates :item_id
     validates :user_id
     validates :token
   end
 
   validates :prefecture_id,
-            numericality: { other_than: 1, message: 'should be selected from the options' }
+            numericality: { other_than: 1, message: "を選択してください" }
 
   def save
     ActiveRecord::Base.transaction do

@@ -22,17 +22,17 @@ RSpec.describe OrderAddress, type: :model do
       it 'zipが空だと保存できないこと' do
         @order_address.zip = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Zip can't be blank")
+        expect(@order_address.errors.full_messages).to include('Zip はハイフンを入力してください')
       end
       it 'zipが半角文字列の「3桁ハイフン4桁」の正しい形式でないと保存できないこと' do
         @order_address.zip = '1234567'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Zip is invalid. Include hyphen(-)')
       end
-      it 'prefectureを選択していないと保存できないこと' do
-        @order_address.prefecture_id = 0
+      it 'prefecture_id が 1 の場合に無効であること' do
+        @order_address.prefecture_id = 1
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@order_address.errors.full_messages).to include('Prefecture を選択してください')
       end
       it 'cityが空だと保存できないこと' do
         @order_address.city = ''
