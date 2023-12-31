@@ -5,6 +5,7 @@ RSpec.describe OrderAddress, type: :model do
     before do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
+      sleep(1)
       @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
     end
 
@@ -22,17 +23,17 @@ RSpec.describe OrderAddress, type: :model do
       it 'zipが空だと保存できないこと' do
         @order_address.zip = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Zip はハイフンを入力してください')
+        expect(@order_address.errors.full_messages).to include("Zip can't be blank")
       end
       it 'zipが半角文字列の「3桁ハイフン4桁」の正しい形式でないと保存できないこと' do
         @order_address.zip = '1234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Zip is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Zip はハイフンを入力してください")
       end
       it 'prefecture_id が 1 の場合に無効であること' do
         @order_address.prefecture_id = 1
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Prefecture を選択してください')
+        expect(@order_address.errors.full_messages).to include("Prefecture を選択してください")
       end
       it 'cityが空だと保存できないこと' do
         @order_address.city = ''
@@ -52,22 +53,22 @@ RSpec.describe OrderAddress, type: :model do
       it 'telephoneは9桁以下の場合登録できない' do
         @order_address.telephone = '12345678'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone should be between 10 and 11 digits')
+        expect(@order_address.errors.full_messages).to include("Telephone は10桁か11桁で入力してください")
       end
       it 'telephoneは12桁以上の場合登録できない' do
         @order_address.telephone = '123456789012'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone should be between 10 and 11 digits')
+        expect(@order_address.errors.full_messages).to include("Telephone は10桁か11桁で入力してください")
       end
       it 'telephoneが数字以外では出品できない' do
         @order_address.telephone = 'abcdefghijk'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone should be only half-width numbers')
+        expect(@order_address.errors.full_messages).to include("Telephone は半角数字で入力してください")
       end
       it 'telephoneが全角数字では出品できない' do
         @order_address.telephone = '０９０１２３４５６７８'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone should be only half-width numbers')
+        expect(@order_address.errors.full_messages).to include("Telephone は半角数字で入力してください")
       end
       it 'tokenが空では登録できないこと' do
         @order_address.token = nil
