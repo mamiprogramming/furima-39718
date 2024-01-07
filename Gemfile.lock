@@ -378,7 +378,7 @@ DEPENDENCIES
   active_hash
   aws-sdk-s3
   bootsnap
-  capistrano (= 3.18.0)
+  capistrano
   capistrano-bundler
   capistrano-rails
   capistrano-rbenv
