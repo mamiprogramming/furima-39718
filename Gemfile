@@ -56,7 +56,7 @@ group :development, :test do
   gem 'faker'
   gem 'faker-japanese'
   gem "gimei"
-  gem 'capistrano', '3.18.0'
+  gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
